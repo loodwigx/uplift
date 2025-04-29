@@ -6,3 +6,8 @@ export const handleEvaluationReq = (req: Request, res: Response, next: NextFunct
     next(error);
   }
 };
+
+export const performEvaluation = (claim) => {
+  // TODO - flesh all of this out once we have tests
+  return null;
+};
