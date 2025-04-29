@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import type Claim from "./types/Claim.ts";
 import { incidentTypes } from "./types/Claim.ts";
 import type Evaluation from "./types/Evaluation.ts";
+import { reasonCodes } from "./types/Evaluation.ts";
 import type Policy from "./types/Policy.ts";
 import { getPolicy } from "./policyUtility.ts";
 
@@ -36,12 +37,23 @@ export const handleEvaluationReq = (req: Request, res: Response, next: NextFunct
   }
 };
 
-
 export const performEvaluation = (claim: Claim): Evaluation => {
   const policy: Policy = getPolicy(claim.policyId);
   if (policy) {
-    console.log("the policy was found");
+    if (claim.incidentDate < policy.startDate || claim.incidentDate > policy.endDate) {
+      return { approved: false, payout: 0, reasonCode: reasonCodes.POLICY_INACTIVE };
+    }
+    
+    if (!policy.coveredIncidents.includes(claim.incidentType)) {
+      return { approved: false, payout: 0, reasonCode: reasonCodes.NOT_COVERED };
+    }
+    
+    const payout = Math.min(claim.amountClaimed - policy.deductible, policy.coverageLimit);
+    if (payout <= 0) {
+      return { approved: false, payout: 0, reasonCode: reasonCodes.ZERO_PAYOUT };
+    }
+
+    return { approved: true, payout, reasonCode: reasonCodes.APPROVED }
   }
-  // TODO - flesh all of this out once we have tests
   return null;
 };
