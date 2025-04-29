@@ -1,7 +1,14 @@
 import type { Request, Response, NextFunction } from "express";
 import type Claim from "./types/Claim.ts";
+import { incidentTypes } from "./types/Claim.ts";
 import type Evaluation from "./types/Evaluation.ts";
 export const valiadteClaimFormat = (claim: Claim): boolean => {
+  return !!( 
+    typeof claim.policyId === "string" &&
+    Object.values(incidentTypes).includes(claim.incidentType) &&
+    claim.incidentDate instanceof Date &&
+    typeof claim.amountClaimed === "number"
+  );
 }
 
 export const handleEvaluationReq = (req: Request, res: Response, next: NextFunction) => {
