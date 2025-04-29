@@ -3,6 +3,14 @@ Uplift Demo
 
 This is a bare-bones back-end api that contains a single route available on put (due to itempotency) to perform the acceptance criteria explained below. To these ends, the project supports express, typescript, jest, and a local run / watch for evaluation with http requests and test watching. To demonstrate TDD, the tests will be implemented before the code will be, as much as is possible.
 
+# Future Enhancements:
+ - Build a front end to manually enter a claim and check against the api
+ - Use an actual DB to store the policies
+ - Some sort of distinction between users (auth?)
+ - More error handling
+ - Better handling of policy-not-found (a 200 response with a code instead of a 404?)
+ - Linting
+
 Taken from uplift-delivery / katas:
 
 # 📋 Insurance Claims Processing Kata
