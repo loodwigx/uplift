@@ -1,0 +1,16 @@
+# Logs and general junk files
+logs
+*.log
+*.out
+*.diff
+npm-debug.log*
+
+# Build
+node_modules
+.DS_Store
+dist
+
+# Editor directories and files
+.vscode/*
+.idea
+*.sublime-*
