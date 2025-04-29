@@ -1,4 +1,5 @@
 import { performEvaluation } from "./claimEvaluation.ts";
+import { reasonCodes } from "./types/Evaluation.ts";
 describe("Perform Evaluation", () => {
   test("Perfect Claim", () => {
     const evaluation = performEvaluation({
@@ -9,6 +10,6 @@ describe("Perform Evaluation", () => {
     });
     expect(evaluation.approved).toBe(true);
     expect(evaluation.payout).toBe(2500);
-    expect(evaluation.reasonCode).toBe("APPROVED");
+    expect(evaluation.reasonCode).toBe(reasonCodes.APPROVED);
   });
 });
