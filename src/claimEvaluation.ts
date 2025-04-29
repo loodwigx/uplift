@@ -2,6 +2,9 @@ import type { Request, Response, NextFunction } from "express";
 import type Claim from "./types/Claim.ts";
 import { incidentTypes } from "./types/Claim.ts";
 import type Evaluation from "./types/Evaluation.ts";
+import type Policy from "./types/Policy.ts";
+import { getPolicy } from "./policyUtility.ts";
+
 export const valiadteClaimFormat = (claim: Claim): boolean => {
   return !!( 
     typeof claim.policyId === "string" &&
@@ -35,6 +38,10 @@ export const handleEvaluationReq = (req: Request, res: Response, next: NextFunct
 
 
 export const performEvaluation = (claim: Claim): Evaluation => {
+  const policy: Policy = getPolicy(claim.policyId);
+  if (policy) {
+    console.log("the policy was found");
+  }
   // TODO - flesh all of this out once we have tests
   return null;
 };
