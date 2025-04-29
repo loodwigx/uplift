@@ -1,5 +1,20 @@
-import { performEvaluation } from "./claimEvaluation.ts";
 import { reasonCodes } from "./types/Evaluation.ts";
+import { performEvaluation, valiadteClaimFormat } from "./claimEvaluation.ts";
+
+describe("Validate Claim Format", () => {
+  test("Legitimate Claim", () => {
+  });
+
+  test("Bogus id", () => {
+  });
+
+  test("Bogus type", () => {
+  });
+
+  test("Bogus date", () => {
+  });
+
+  test("Bogus amount", () => {
 describe("Perform Evaluation", () => {
   test("Perfect Claim", () => {
     const evaluation = performEvaluation({
