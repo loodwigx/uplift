@@ -1,6 +1,7 @@
 import { Router } from "express";
+import { handleEvaluationReq } from "./claimEvaluation.ts";
 const router = Router();
 
-router.get("/", () => console.log("hello world"));
+router.put("/", handleEvaluationReq);
 
 export default router;
